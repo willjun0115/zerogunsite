@@ -14,7 +14,7 @@ class Post(models.Model):
     text = models.CharField(max_length=200)
     writer = models.CharField(max_length=20, default='unknown')
     nickname = models.CharField(max_length=20, default='익명')
-    date = models.DateTimeField('date posted')
+    date = models.DateTimeField('date posted', auto_now_add=True)
     likes = models.IntegerField(default=0)
 
     def __str__(self):
