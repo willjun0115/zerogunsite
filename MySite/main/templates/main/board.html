@@ -21,7 +21,7 @@
             font-size: 40px;
             color: pink;
             text-align: left;
-            font-family: 'Gugi', cursive;
+            font-family: 'Jua', sans-serif;
             padding-top: 10px;
             padding-left: 10px;
             padding-bottom: 25px;
@@ -47,7 +47,6 @@
 
         #post_input {
             display: flex;
-            align-items: left;
             justify-content: left;
             padding: 10px;
             padding-top: 20px;
@@ -97,12 +96,10 @@
     {% else %}
         <p>No post.</p>
     {% endif %}
-    <footer>
-        <form action="{% url 'main:post' board.id %}" method="post" id="post_input">
-            {% csrf_token %}
-            <input name="post_text" type="text" id="post_text" autofocus>
-            <input class="noselect btn" type="submit" value="업로드">
-        </form>
-    </footer>
+    <form action="{% url 'main:post' board.id %}" method="post" id="post_input">
+        {% csrf_token %}
+        <input name="post_text" type="text" id="post_text" autofocus>
+        <input class="noselect btn" type="submit" value="업로드">
+    </form>
 </body>
 </html>
