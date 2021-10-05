@@ -17,12 +17,20 @@
             user-select: none;
         }
 
+        header a {
+            font-size: 14px;
+            color: gray;
+            text-align: left;
+            font-family: 'Jua', sans-serif;
+            text-decoration: none;
+        }
+
         h1 {
             font-size: 40px;
             color: pink;
             text-align: left;
             font-family: 'Jua', sans-serif;
-            padding-top: 10px;
+            padding-top: 5px;
             padding-left: 10px;
             padding-bottom: 25px;
         }
@@ -42,7 +50,7 @@
 
         .like {
             color: white;
-            font-size: 10px;
+            font-size: 11px;
             background-color: pink;
             text-decoration: none;
         }
@@ -92,7 +100,10 @@
     </style>
 </head>
 <body>
-    <h1 class="noselect">{{ board.title }}</h1>
+    <header>
+        <a href="{% url 'main:index' %}">전체 게시판 ></a>
+        <h1 class="noselect">{{ board.title }}</h1>
+    </header>
     {% if latest_post_list %}
         <ul>
         {% for post in latest_post_list %}
