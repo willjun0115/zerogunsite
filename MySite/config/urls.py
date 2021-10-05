@@ -18,6 +18,5 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('polls/', include('polls.urls')),  # polls/urls 에 연결, 주소를 '루트 주소/polls/' 로 설정
     path('main/', include('main.urls')),
 ]
