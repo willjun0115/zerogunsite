@@ -152,7 +152,7 @@
     {% endif %}
     <form action="{% url 'main:post' board.id %}" method="post" id="post_input">
         {% csrf_token %}
-        <input name="post_text" type="text" id="post_text" autofocus>
+        <input name="post_text" type="text" id="post_text" placeholder="내용을 입력해주세요" autofocus>
         <input class="noselect btn" type="submit" value="업로드">
     </form>
 </body>
