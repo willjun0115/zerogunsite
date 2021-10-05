@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ board.title }}</title>
+</head>
+<body>
+    <h1>{{ board.title }}</h1>
+    {% if latest_post_list %}
+        <ul>
+        {% for post in latest_post_list %}
+            {% if board.title == '익명 게시판' %}
+                <li>{{ post.nickname }} : {{ post.text }}</li>
+            {% else %}
+                <li>{{ post.nickname }}({{ post.writer }}) : {{ post.text }}</li>
+            {% endif %}
+            <a href="{% url 'main:like' post.id %}">좋아요 {{ post.likes }}</a>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>No post.</p>
+    {% endif %}
+    <form action="{% url 'main:post' board.id %}" method="post">
+        {% csrf_token %}
+        <input name="post_text" type="text" id="post_text" autofocus>
+    </form>
+</body>
+</html>
