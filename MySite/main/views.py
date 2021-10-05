@@ -39,7 +39,7 @@ def post(request, board_id):
     text = request.POST.get('post_text')
     board = get_object_or_404(Board, pk=board_id)
     writer_ip = visitor_ip(request)
-    post = Post(board=board, writer=writer_ip, text=text, date=timezone.now(), likes=0)
+    post = Post(board=board, writer=writer_ip, text=text, date=timezone.localtime(), likes=0)
     post.save()
     return HttpResponseRedirect(reverse('main:board', args=(board.id,)))
 
