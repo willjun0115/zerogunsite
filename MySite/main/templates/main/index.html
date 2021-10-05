@@ -5,19 +5,43 @@
     <title>Index</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+        .noselect {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
 
         h1 {
             font-size: 40px;
-            color: rgb(243, 126, 161);
-            text-align: center;
+            color: gray;
+            text-align: left;
             font-family: 'Gugi', cursive;
             padding-top: 10px;
             padding-bottom: 40px;
         }
+
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            font-family: 'Jua', sans-serif;
+            text-decoration: none;
+            color: black;
+        }
+
+        li:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
-    <h1>게시판 목록</h1>
+    <h1 class="noselect">게시판 목록</h1>
 {% if latest_board_list %}
     <ul>
     {% for board in latest_board_list %}
