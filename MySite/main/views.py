@@ -46,6 +46,7 @@ def post(request, board_id):
 
 def like(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
-    post.likes += 1
-    post.save()
+    if post.writer != visitor_ip(request):
+        post.likes += 1
+        post.save()
     return HttpResponseRedirect(reverse('main:board', args=(post.board.id,)))
