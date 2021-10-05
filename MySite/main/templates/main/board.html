@@ -17,6 +17,12 @@
             user-select: none;
         }
 
+        header {
+            position: sticky;
+            top: 0;
+            display: flex;
+        }
+
         header a {
             font-size: 14px;
             color: gray;
@@ -37,10 +43,30 @@
 
         ul {
             list-style-type: none;
-            height: 80vh;
+            height: 100vh;
         }
 
         li {
+            margin-bottom: 5px;
+        }
+
+        li .nickname {
+            font-family: 'Nanum Gothic', sans-serif;
+            font-size: 12px;
+            text-align: left;
+            text-decoration: none;
+            color: black;
+        }
+
+        li .date {
+            font-family: 'Nanum Gothic', sans-serif;
+            font-size: 10px;
+            text-align: left;
+            text-decoration: none;
+            color: gray;
+        }
+
+        li .text {
             font-family: 'Nanum Gothic', sans-serif;
             font-size: 14px;
             text-align: left;
@@ -107,11 +133,15 @@
     {% if latest_post_list %}
         <ul>
         {% for post in latest_post_list %}
-            {% if board.title == '익명 게시판' %}
-                <li><span>{{ post.nickname }} :</span> {{ post.text }}</li>
-            {% else %}
-                <li>{{ post.nickname }}({{ post.writer }}) : {{ post.text }}</li>
-            {% endif %}
+            <li>
+                <div>
+                    <span class="nickname">{{ post.nickname }} ({{ post.writer }})</span>
+                    <span class="date">{{ post.date }}</span>
+                </div>
+                <div class="text">
+                    {{ post.text }}
+                </div>
+            </li>
             <a href="{% url 'main:like' post.id %}" class="like noselect">좋아요 {{ post.likes }}</a>
         {% endfor %}
     </ul>
