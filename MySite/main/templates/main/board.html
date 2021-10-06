@@ -146,7 +146,7 @@
             </li>
             <a href="{% url 'main:like' post.id %}" class="like noselect">좋아요 {{ post.likes }}</a>
         {% endfor %}
-    </ul>
+        </ul>
     {% else %}
         <p>No post.</p>
     {% endif %}

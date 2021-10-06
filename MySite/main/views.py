@@ -56,3 +56,26 @@ def like(request, post_id):
         post.likes += 1
         post.save()
     return HttpResponseRedirect(reverse('main:board', args=(post.board.id,)))
+
+
+def setting(request):
+    my_ip = visitor_ip(request)
+    if get_object_or_404(User, ip=my_ip):
+        user = get_object_or_404(User, ip=my_ip)
+    else:
+        user = User(ip=my_ip)
+        user.save()
+    context = {
+        'vistor_ip': my_ip,
+        'user': user,
+    }
+    return render(request, 'main/setting.html', context)
+
+
+def change_name(request):
+    my_ip = visitor_ip(request)
+    text = request.POST.get('nickname')
+    user = get_object_or_404(User, ip=my_ip)
+    user.username = text
+    user.save()
+    return HttpResponseRedirect(reverse('main:setting'))
