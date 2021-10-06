@@ -28,9 +28,11 @@ def get_user_or_create(request):
 
 
 def index(request):
+    my_ip = visitor_ip(request)
     latest_board_list = get_list_or_404(Board)
     context = {
-        'latest_board_list': latest_board_list
+        'latest_board_list': latest_board_list,
+        'ip': my_ip
     }
     return render(request, 'main/index.html', context)
 
@@ -47,7 +49,8 @@ def board(request, board_id):
     context = {
         'board': board,
         'latest_post_list': latest_post_list,
-        'allowed': allowed
+        'allowed': allowed,
+        'ip': user.ip
     }
     return render(request, 'main/board.html', context)
 
@@ -74,7 +77,7 @@ def setting(request):
     my_ip = visitor_ip(request)
     user = get_user_or_create(request)
     context = {
-        'visitor_ip': my_ip,
+        'ip': my_ip,
         'user': user,
     }
     return render(request, 'main/setting.html', context)
