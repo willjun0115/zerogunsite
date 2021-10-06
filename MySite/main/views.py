@@ -66,7 +66,7 @@ def setting(request):
         user = User(ip=my_ip)
         user.save()
     context = {
-        'vistor_ip': my_ip,
+        'visitor_ip': my_ip,
         'user': user,
     }
     return render(request, 'main/setting.html', context)
