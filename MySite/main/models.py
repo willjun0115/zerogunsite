@@ -12,7 +12,7 @@ class Board(models.Model):
 class Post(models.Model):
     board = models.ForeignKey(Board, on_delete=models.CASCADE)
     text = models.CharField(max_length=200)
-    ip = models.IPAddressField()
+    ip = models.GenericIPAddressField(protocol='IPv4')
     writer = models.CharField(max_length=20, default='익명')
     date = models.DateTimeField('date posted', auto_now_add=True)
     likes = models.IntegerField(default=0)
