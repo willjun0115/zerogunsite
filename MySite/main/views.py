@@ -17,6 +17,16 @@ def visitor_ip(request):
     return ip
 
 
+def get_user_or_create(request):
+    my_ip = visitor_ip(request)
+    if get_object_or_404(User, ip=my_ip):
+        user = get_object_or_404(User, ip=my_ip)
+    else:
+        user = User(ip=my_ip)
+        user.save()
+    return user
+
+
 def index(request):
     latest_board_list = get_list_or_404(Board)
     context = {
@@ -38,12 +48,7 @@ def board(request, board_id):
 def post(request, board_id):
     text = request.POST.get('post_text')
     board = get_object_or_404(Board, pk=board_id)
-    my_ip = visitor_ip(request)
-    if get_object_or_404(User, ip=my_ip):
-        writer = get_object_or_404(User, ip=my_ip)
-    else:
-        writer = User(ip=my_ip)
-        writer.save()
+    writer = get_user_or_create(request)
     post = Post(board=board, writer=writer, text=text, likes=0)
     post.save()
     return HttpResponseRedirect(reverse('main:board', args=(board.id,)))
@@ -60,11 +65,7 @@ def like(request, post_id):
 
 def setting(request):
     my_ip = visitor_ip(request)
-    if get_object_or_404(User, ip=my_ip):
-        user = get_object_or_404(User, ip=my_ip)
-    else:
-        user = User(ip=my_ip)
-        user.save()
+    user = get_user_or_create(request)
     context = {
         'visitor_ip': my_ip,
         'user': user,
@@ -73,9 +74,8 @@ def setting(request):
 
 
 def change_name(request):
-    my_ip = visitor_ip(request)
     text = request.POST.get('nickname')
-    user = get_object_or_404(User, ip=my_ip)
+    user = get_user_or_create(request)
     user.username = text
     user.save()
     return HttpResponseRedirect(reverse('main:setting'))
