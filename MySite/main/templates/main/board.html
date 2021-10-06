@@ -141,7 +141,7 @@
                         <span class="nickname">{{ post.writer }} ({{ post.writer.ip }})</span>
                         <span class="date">{{ post.date }}</span>
                         {% if post.writer.ip == ip %}
-                            <span><a href="{% url 'main:like' post.id %}">삭제</a></span>
+                            <span><a href="{% url 'main:delete_post' post.id %}">삭제</a></span>
                         {% endif %}
                     </div>
                     <div class="text">

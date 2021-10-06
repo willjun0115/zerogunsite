@@ -89,3 +89,11 @@ def change_name(request):
     user.username = text
     user.save()
     return HttpResponseRedirect(reverse('main:setting'))
+
+
+def delete_post(request, post_id):
+    my_ip = visitor_ip(request)
+    post = get_object_or_404(Post, pk=post_id)
+    if post.writer.ip == my_ip:
+        post.delete()
+    return HttpResponseRedirect(reverse('main:board', args=(post.board.id,)))
