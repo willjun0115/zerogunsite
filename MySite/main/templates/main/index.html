@@ -50,8 +50,10 @@
     {% for board in latest_board_list %}
         <li><a href="{% url 'main:board' board.id %}">{{ board.title }}</a></li>
     {% endfor %}
-        <li><a href="{% url 'main:setting' %}">설정</a></li>
     </ul>
+    <footer>
+        <a href="{% url 'main:setting' %}">설정</a>
+    </footer>
 {% else %}
     <p>No boards are available.</p>
 {% endif %}

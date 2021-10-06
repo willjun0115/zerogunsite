@@ -128,32 +128,36 @@
     </style>
 </head>
 <body>
-    <header>
-        <a href="{% url 'main:index' %}">전체 게시판 ></a>
-        <h1 class="noselect">{{ board.title }}</h1>
-    </header>
-    {% if latest_post_list %}
-        <ul>
-        {% for post in latest_post_list %}
-            <li>
-                <div>
-                    <span class="nickname">{{ post.writer }} ({{ post.writer.ip }})</span>
-                    <span class="date">{{ post.date }}</span>
-                </div>
-                <div class="text">
-                    {{ post.text }}
-                </div>
-            </li>
-            <a href="{% url 'main:like' post.id %}" class="like noselect">좋아요 {{ post.likes }}</a>
-        {% endfor %}
-        </ul>
+    {% if allowed %}
+        <header>
+            <a href="{% url 'main:index' %}">전체 게시판 ></a>
+            <h1 class="noselect">{{ board.title }}</h1>
+        </header>
+        {% if latest_post_list %}
+            <ul>
+            {% for post in latest_post_list %}
+                <li>
+                    <div>
+                        <span class="nickname">{{ post.writer }} ({{ post.writer.ip }})</span>
+                        <span class="date">{{ post.date }}</span>
+                    </div>
+                    <div class="text">
+                        {{ post.text }}
+                    </div>
+                </li>
+                <a href="{% url 'main:like' post.id %}" class="like noselect">좋아요 {{ post.likes }}</a>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No post.</p>
+        {% endif %}
+        <form action="{% url 'main:post' board.id %}" method="post" id="post_input">
+            {% csrf_token %}
+            <input name="post_text" type="text" id="post_text" placeholder="내용을 입력해주세요" autofocus>
+            <input class="noselect btn" type="submit" value="업로드">
+        </form>
     {% else %}
-        <p>No post.</p>
+        <p>You are not allowed to access to this board.</p>
     {% endif %}
-    <form action="{% url 'main:post' board.id %}" method="post" id="post_input">
-        {% csrf_token %}
-        <input name="post_text" type="text" id="post_text" placeholder="내용을 입력해주세요" autofocus>
-        <input class="noselect btn" type="submit" value="업로드">
-    </form>
 </body>
 </html>

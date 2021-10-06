@@ -36,11 +36,18 @@ def index(request):
 
 
 def board(request, board_id):
+    user = get_user_or_create(request)
     board = get_object_or_404(Board, pk=board_id)
+    allowed = True
+    if board.protected:
+        allowed = False
+        if board.id in user.allowed_board_id:
+            allowed = True
     latest_post_list = reversed(get_list_or_404(Post, board=board)[:20])
     context = {
         'board': board,
-        'latest_post_list': latest_post_list
+        'latest_post_list': latest_post_list,
+        'allowed': allowed
     }
     return render(request, 'main/board.html', context)
 
