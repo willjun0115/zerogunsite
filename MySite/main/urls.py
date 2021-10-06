@@ -10,4 +10,5 @@ urlpatterns = [
     path('<int:board_id>/post/', views.post, name='post'),
     path('<str:post_id>/like/', views.like, name='like'),
     path('setting/', views.setting, name='setting'),
+    path('setting/change_name/', views.change_name, name='change_name'),
 ]
