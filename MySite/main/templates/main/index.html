@@ -48,7 +48,11 @@
 {% if latest_board_list %}
     <ul>
     {% for board in latest_board_list %}
-        <li><a href="{% url 'main:board' board.id %}">{{ board.title }}</a></li>
+        {% if board.protected %}
+            <li><a href="{% url 'main:board' board.id %}">{{ board.title }} 🔒</a></li>
+        {% else %}
+            <li><a href="{% url 'main:board' board.id %}">{{ board.title }}</a></li>
+        {% endif %}
     {% endfor %}
     </ul>
     <footer>
