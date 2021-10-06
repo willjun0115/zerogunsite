@@ -12,8 +12,8 @@ class Board(models.Model):
 class Post(models.Model):
     board = models.ForeignKey(Board, on_delete=models.CASCADE)
     text = models.CharField(max_length=200)
-    writer = models.CharField(max_length=20, default='unknown')
-    nickname = models.CharField(max_length=20, default='익명')
+    ip = models.IPAddressField()
+    writer = models.CharField(max_length=20, default='익명')
     date = models.DateTimeField('date posted', auto_now_add=True)
     likes = models.IntegerField(default=0)
 
