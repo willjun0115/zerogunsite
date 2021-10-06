@@ -65,7 +65,7 @@
         </li>
         <li>
             <div>닉네임 변경</div>
-            <form action="{% url 'main:post' %}" method="post" id="post_input">
+            <form action="{% url 'main:change_name' %}" method="post" id="post_input">
                 {% csrf_token %}
                 <input name="nickname" type="text" id="nickname" placeholder="변경할 닉네임을 입력해주세요">
                 <input class="noselect btn" type="submit" value="변경">
