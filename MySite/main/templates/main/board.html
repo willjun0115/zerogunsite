@@ -51,28 +51,29 @@
             margin-bottom: 5px;
         }
 
-        li .nickname {
+        li span {
             font-family: 'Nanum Gothic', sans-serif;
-            font-size: 12px;
             text-align: left;
             text-decoration: none;
+        }
+
+        li .nickname {
+            font-size: 12px;
             color: black;
         }
 
         li .date {
-            font-family: 'Nanum Gothic', sans-serif;
             font-size: 10px;
-            text-align: left;
-            text-decoration: none;
             color: gray;
         }
 
         li .text {
-            font-family: 'Nanum Gothic', sans-serif;
             font-size: 14px;
-            text-align: left;
-            text-decoration: none;
             color: black;
+        }
+
+        li .delete {
+            font-size: 10px;
         }
 
         .like {
@@ -141,7 +142,7 @@
                         <span class="nickname">{{ post.writer }} ({{ post.writer.ip }})</span>
                         <span class="date">{{ post.date }}</span>
                         {% if post.writer.ip == ip %}
-                            <span><a href="{% url 'main:delete_post' post.id %}">삭제</a></span>
+                            <span><a href="{% url 'main:delete_post' post.id %}" class="delete">삭제</a></span>
                         {% endif %}
                     </div>
                     <div class="text">
