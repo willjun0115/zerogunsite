@@ -137,7 +137,7 @@
         {% for post in latest_post_list %}
             <li>
                 <div>
-                    <span class="nickname">{{ post.writer }} ({{ post.ip }})</span>
+                    <span class="nickname">{{ post.writer }} ({{ post.writer.ip }})</span>
                     <span class="date">{{ post.date }}</span>
                 </div>
                 <div class="text">

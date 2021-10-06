@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Board(models.Model):
+    id = models.BigAutoField(help_text="ID", primary_key=True)
     title = models.CharField(max_length=20)
     date = models.DateTimeField('date published')
 
@@ -9,11 +10,21 @@ class Board(models.Model):
         return self.title
 
 
-class Post(models.Model):
-    board = models.ForeignKey(Board, on_delete=models.CASCADE)
-    text = models.CharField(max_length=200)
+class User(models.Model):
+    id = models.BigAutoField(help_text="ID", primary_key=True)
     ip = models.GenericIPAddressField(protocol='IPv4', null=True)
-    writer = models.CharField(max_length=20, default='익명')
+    username = models.CharField(max_length=16, default='user')
+    date = models.DateTimeField('date created', auto_now_add=True)
+
+    def __str__(self):
+        return self.username
+
+
+class Post(models.Model):
+    id = models.BigAutoField(help_text="ID", primary_key=True)
+    board = models.ForeignKey(Board, on_delete=models.CASCADE)
+    writer = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.CharField(max_length=200)
     date = models.DateTimeField('date posted', auto_now_add=True)
     likes = models.IntegerField(default=0)
 
