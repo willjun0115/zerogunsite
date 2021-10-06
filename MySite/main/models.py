@@ -16,7 +16,7 @@ class User(models.Model):
     ip = models.GenericIPAddressField(protocol='IPv4', null=True)
     username = models.CharField(max_length=16, default='user')
     date = models.DateTimeField('date created', auto_now_add=True)
-    allowed_board_id = ArrayField(models.CharField(), blank=True, null=True)
+    allowed_board_id = ArrayField(models.CharField(max_length=10, blank=True), null=True)
 
     def __str__(self):
         return self.username
