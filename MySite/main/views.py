@@ -74,10 +74,9 @@ def like(request, post_id):
 
 
 def setting(request):
-    my_ip = visitor_ip(request)
     user = get_user_or_create(request)
     context = {
-        'ip': my_ip,
+        'ip': user.ip,
         'user': user,
     }
     return render(request, 'main/setting.html', context)

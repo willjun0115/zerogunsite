@@ -147,8 +147,8 @@
                     <div class="text">
                         {{ post.text }}
                     </div>
+                    <a href="{% url 'main:like' post.id %}" class="like noselect">좋아요 {{ post.likes }}</a>
                 </li>
-                <a href="{% url 'main:like' post.id %}" class="like noselect">좋아요 {{ post.likes }}</a>
             {% endfor %}
             </ul>
         {% else %}
