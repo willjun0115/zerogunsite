@@ -21,7 +21,7 @@ def get_user_or_create(request):
     my_ip = visitor_ip(request)
     user = None
     try:
-        user = get_object_or_404(User, ip=my_ip)
+        user = User.objects.get(ip=my_ip)
     except:
         pass
     else:
