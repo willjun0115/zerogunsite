@@ -65,11 +65,22 @@ def post(request, board_id):
 
 
 def like(request, post_id):
-    my_ip = visitor_ip(request)
+    user = get_user_or_create(request)
     post = get_object_or_404(Post, pk=post_id)
-    if post.writer.ip != my_ip:
-        post.likes += 1
-        post.save()
+    if post.writer.ip != user.ip:
+        liked_list = user.liked_post_id.split()
+        if str(post.id) in liked_list:
+            post.likes -= 1
+            post.save()
+            liked_list.remove(str(post.id))
+            user.liked_post_id = ' '.join(liked_list)
+            user.save()
+        else:
+            post.likes += 1
+            post.save()
+            liked_list.append(str(post.id))
+            user.liked_post_id = ' '.join(liked_list)
+            user.save()
     return HttpResponseRedirect(reverse('main:board', args=(post.board.id,)))
 
 
