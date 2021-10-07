@@ -19,8 +19,10 @@ def visitor_ip(request):
 
 def get_user_or_create(request):
     my_ip = visitor_ip(request)
-    if User.objects.get(ip=my_ip):
+    try:
         user = get_object_or_404(User, ip=my_ip)
+    except:
+        pass
     else:
         user = User(ip=my_ip)
         user.save()
