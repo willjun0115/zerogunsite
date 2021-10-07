@@ -4,6 +4,7 @@ from django.template import loader
 from django.urls import reverse
 from django.utils import timezone
 from .models import Post, Board, User
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def visitor_ip(request):
@@ -19,9 +20,10 @@ def visitor_ip(request):
 
 def get_user_or_create(request):
     my_ip = visitor_ip(request)
-    if User.objects.get(ip=my_ip):
+    try:
+        User.objects.get(ip=my_ip)
         user = get_object_or_404(User, ip=my_ip)
-    else:
+    except ObjectDoesNotExist:
         user = User(ip=my_ip)
         user.save()
     return user
