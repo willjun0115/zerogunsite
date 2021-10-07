@@ -45,7 +45,7 @@ def board(request, board_id):
     allowed = True
     if board.protected:
         allowed = False
-        if str(board.id) in user.allowed_board_id.split():
+        if str(board.id) in user.allowed_board_id.split(','):
             allowed = True
     latest_post_list = reversed(get_list_or_404(Post, board=board)[:20])
     context = {

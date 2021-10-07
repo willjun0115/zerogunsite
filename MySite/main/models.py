@@ -15,8 +15,8 @@ class User(models.Model):
     ip = models.GenericIPAddressField(protocol='IPv4', null=True)
     username = models.CharField(max_length=16, default='user')
     date = models.DateTimeField('date created', auto_now_add=True)
-    allowed_board_id = models.CharField(max_length=100, blank=True, null=True)
-    liked_post_id = models.CommaSeparatedIntegerField(max_length=1000)
+    allowed_board_id = models.CharField(max_length=100, default='1,')
+    liked_post_id = models.CharField(max_length=2000, default='0,')
 
     def __str__(self):
         return self.username
