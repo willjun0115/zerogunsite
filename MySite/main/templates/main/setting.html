@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>설정</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
+        .noselect {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            display: flex;
+            background-color: white;
+        }
+
+        header a {
+            font-size: 14px;
+            color: gray;
+            text-align: left;
+            font-family: 'Jua', sans-serif;
+            text-decoration: none;
+        }
+
+        h1 {
+            font-size: 40px;
+            color: pink;
+            text-align: left;
+            font-family: 'Jua', sans-serif;
+            padding-top: 5px;
+            padding-left: 10px;
+            padding-bottom: 25px;
+        }
+
+        ul {
+            list-style-type: none;
+            height: 100vh;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="{% url 'main:index' %}">전체 게시판 ></a>
+        <h1 class="noselect">설정</h1>
+    </header>
+    <ul>
+        <li>
+            <div><strong>임시 계정 스테이터스</strong></div>
+            <div>ip address : {{ ip }}</div>
+            <div>username : {{ user.username }}</div>
+        </li>
+        <li>
+            <div>닉네임 변경</div>
+            <form action="{% url 'main:change_name' %}" method="post" id="post_input">
+                {% csrf_token %}
+                <input name="nickname" type="text" id="nickname" placeholder="변경할 닉네임을 입력해주세요">
+                <input class="noselect btn" type="submit" value="변경">
+            </form>
+        </li>
+    </ul>
+</body>
+</html>

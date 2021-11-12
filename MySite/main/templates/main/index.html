@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+        .noselect {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        h1 {
+            font-size: 50px;
+            color: pink;
+            text-align: left;
+            font-family: 'Gugi', cursive;
+            padding-top: 10px;
+            padding-left: 10px;
+            padding-bottom: 25px;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        li a {
+            font-family: 'Jua', sans-serif;
+            font-size: 20px;
+            text-align: left;
+            text-decoration: none;
+            color: black;
+        }
+
+        li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="noselect">게시판 목록</h1>
+{% if latest_board_list %}
+    <ul>
+    {% for board in latest_board_list %}
+        {% if board.protected %}
+            <li><a href="{% url 'main:board' board.id %}">{{ board.title }} 🔒</a></li>
+        {% else %}
+            <li><a href="{% url 'main:board' board.id %}">{{ board.title }}</a></li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+    <footer>
+        <a href="{% url 'main:setting' %}">설정</a>
+    </footer>
+{% else %}
+    <p>No boards are available.</p>
+{% endif %}
+</body>
+</html>
